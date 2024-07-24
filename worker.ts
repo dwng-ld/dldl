@@ -40,13 +40,20 @@ const upload = async (
   })
   const exported = formData.exportData()
 
-  const json = await fetch('https://api.end2end.tech/upload', {
+  const text = await fetch('https://api.end2end.tech/upload', {
     method: 'POST',
     headers: exported[0],
     body: exported[1],
-  }).then((res) => res.json())
+  }).then((res) => res.text())
+  let fileID: string
+  try {
+    const json = JSON.parse(text)
+    fileID = json.FileID
+  } catch {
+    throw new Error(`JSON parse failed: ${text}`)
+  }
 
-  return json.FileID
+  return fileID
 }
 self.addEventListener('message', async ({ data: path }: { data: string }) => {
   try {
