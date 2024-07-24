@@ -17,7 +17,10 @@ const ports = [
 export type Output = {
   ids: string[]
   path: string
-} | 'error'
+} | {
+  error: true
+  path: string
+}
 
 const client = Deno.createHttpClient({
   proxy: {
@@ -81,6 +84,9 @@ self.addEventListener('message', async ({ data: path }: { data: string }) => {
     )
   } catch (e) {
     console.error(e)
-    self.postMessage('error' satisfies Output)
+    self.postMessage({
+      error: true,
+      path: path
+    } satisfies Output)
   }
 })

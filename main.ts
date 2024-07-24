@@ -31,7 +31,8 @@ for (const worker of workers) {
   }
   worker.onmessage = async ({ data }: { data: Output }) => {
     i ++
-    if (data === 'error') {
+    if ('error' in data) {
+      queues.push(data.path)
       setTimeout(() => next(), 100)
       return
     }
