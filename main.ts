@@ -2,12 +2,13 @@ import type { Output } from './worker.ts'
 
 const [from, to] = Deno.args.map(s => parseInt(s))
 
-const queues = (await Deno.readTextFile('result.csv')).split('\n').slice(from, to)
+const queues = (await Deno.readTextFile('result.csv')).split('\n')
   .filter(s => s.endsWith('file'))
   .map(s => s.split(',')[0])
+  .slice(from, to)
 
 const len = queues.length
-console.log('Inited queues')
+console.log('Inited queues', len)
 
 const workers = [...Array(32)].map(() => new Worker(import.meta.resolve('./worker.ts'), { type: 'module' }))
 

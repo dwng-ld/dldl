@@ -1,3 +1,4 @@
 /.tor
 /result.jsonl
 /result.csv
+/.env
