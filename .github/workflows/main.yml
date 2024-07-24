@@ -51,6 +51,7 @@ jobs:
       - name: end
         run: |
           cp result.jsonl result/result/${{ github.event.inputs.start }}-${{ github.event.inputs.end }}.jsonl
+          cd result
           git add .
           git commit -m 'next'
           git pull
