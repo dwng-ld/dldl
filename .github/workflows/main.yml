@@ -1,5 +1,7 @@
 name: Main
 
+run-name: '${{ inputs.start }}-${{ inputs.end }}'
+
 on:
   workflow_dispatch:
     inputs:
