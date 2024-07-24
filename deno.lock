@@ -1,0 +1,20 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "jsr:@std/path@^1.0.1": "jsr:@std/path@1.0.1"
+    },
+    "jsr": {
+      "@std/path@1.0.1": {
+        "integrity": "e061ff02c28481ca49e3a14981875c345e9fc7e973190672782cd0ac8af70428"
+      }
+    }
+  },
+  "remote": {},
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/path@^1.0.1",
+      "jsr:@std/streams@^0.224.5"
+    ]
+  }
+}
