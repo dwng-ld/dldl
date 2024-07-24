@@ -14,6 +14,16 @@ jobs:
     steps:
       - name: Setup repo
         uses: actions/checkout@v4
+      - name: result
+        uses: actions/checkout@v4
+        with:
+          repository: dwng-ld/result
+          path: result
+      - name: Setup result
+        run: |
+          cd result
+          git config pull.rebase false
+          cd ..
       - name: Setup Tor
         run: sudo apt install tor -y
       - name: Setup Deno
@@ -28,5 +38,10 @@ jobs:
       - name: task
         run: deno task d 0 100
       - name: end
-        run: cat result.jsonl
+        run: |
+          cp result.jsonl result/result/0-100.jsonl
+          git add .
+          git commit -m 'next'
+          git pull
+          git push
       
