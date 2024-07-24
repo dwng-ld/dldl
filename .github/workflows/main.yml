@@ -19,6 +19,7 @@ jobs:
         with:
           repository: dwng-ld/result
           path: result
+          token: ${{ secrets.GH_P }}
       - name: Setup result
         run: |
           cd result
