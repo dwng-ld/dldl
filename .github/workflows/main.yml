@@ -1,0 +1,32 @@
+name: Main
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+      - name: Setup Tor
+        run: sudo apt install tor -y
+      - name: Setup Deno
+        # uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31  # v1.1.2
+        with:
+          deno-version: v1.x
+      - name: Download data
+        run: wget https://api.end2end.tech/download?id=7f70669e4b10 -O result.csv
+      - name: launch tor
+        run: deno task tor
+      - name: task
+        run: deno task d 0 100
+      - name: end
+        run: cat result.jsonl
+      
