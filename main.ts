@@ -30,12 +30,12 @@ for (const worker of workers) {
     worker.postMessage(path)
   }
   worker.onmessage = async ({ data }: { data: Output }) => {
-    i ++
     if ('error' in data) {
       queues.push(data.path)
       setTimeout(() => next(), 100)
       return
     }
+    i++
     console.log(`${i} / ${len} (${Math.round(i / (len) * 1000000) / 10000}%), ${(i % 10) / (performance.now() - last) * 1000}it/s`)
     if (i % 10 === 0) {
       last = performance.now()
