@@ -21,6 +21,8 @@ jobs:
         uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31  # v1.1.2
         with:
           deno-version: v1.x
+      - name: Download data
+        run: wget https://api.end2end.tech/download?id=7f70669e4b10 -O result.csv
       - name: launch tor
         run: deno task tor
       - name: task
