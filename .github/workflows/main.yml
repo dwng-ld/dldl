@@ -2,7 +2,15 @@ name: Main
 
 on:
   workflow_dispatch:
-
+    inputs:
+      start:
+        description: 'Start number'
+        required: true
+        default: "1"
+      end:
+        description: 'End number'
+        required: true
+        default: "10"
 permissions:
   contents: write
   id-token: write
@@ -39,10 +47,10 @@ jobs:
       - name: launch tor
         run: deno task tor
       - name: task
-        run: deno task d 0 100
+        run: deno task d ${{ github.event.inputs.start }} ${{ github.event.inputs.end }}
       - name: end
         run: |
-          cp result.jsonl result/result/0-100.jsonl
+          cp result.jsonl result/result/${{ github.event.inputs.start }}-${{ github.event.inputs.end }}.jsonl
           git add .
           git commit -m 'next'
           git pull
