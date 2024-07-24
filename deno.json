@@ -4,7 +4,7 @@
     "semiColons": false
   },
   "tasks": {
-    "d": "deno run -A main.ts 0 50",
+    "d": "deno run -A main.ts",
     "tor": "deno run -A tors.ts"
   },
   "imports": {
